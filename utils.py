@@ -6,13 +6,13 @@ import torch
 # transform to one hot code
 
 
-def one_hot_board(env):
-    player = env._get_obs()[1]
+def one_hot_board(state):
+    player = state[1]
     if player == 'O':
-        return np.eye(3)[env.board].reshape(-1)
+        return np.eye(3)[list(state[0])].reshape(-1)
     if player == 'X':
         # permute for symmetry
-        return np.eye(3)[env.board][:, [0, 2, 1]].reshape(-1)
+        return np.eye(3)[list(state[0])][:, [0, 2, 1]].reshape(-1)
 
 
 # state--27 features(one hot code)
