@@ -1,6 +1,6 @@
 # Training-tic-tac-toe-AI-by-DQN
 
-
+python train.py
 
 
 # env 
