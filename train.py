@@ -3,21 +3,25 @@ from tictactoe.env import TicTacToe
 import torch
 import numpy as np
 import random
-from utils import Net
+from utils import Net,one_hot_board
+
 
 
 def run():
-    env = TicTacToe()
-    state = torch.tensor([env.reset()], dtype=torch.float).to(model.device)
+    env = TicTacToeEnv()
+    state = torch.tensor([one_hot_board(env.reset())], dtype=torch.float).to(model.device)
     for step in range(n_step):
         t = np.clip(step / eps_steps, 0, 1)
         eps = (1 - t) * eps_start + t * eps_end
         print('\r'+f'step----{step},epsilon----{eps}', flush=True, end='')
         action, was_random = model.select_action(state, eps)
         next_state, reward, done, _ = env.step(action.item())
+        next_state=one_hot_board(next_state)
+        
         if not done:
             next_state, _, done,  _ = env.step(
                 model.select_dummy_action(next_state))
+            next_state=one_hot_board(next_state)
             next_state = torch.tensor(
                 [next_state], dtype=torch.float).to(model.device)
 
@@ -34,7 +38,7 @@ def run():
 
         if done:
             state = torch.tensor(
-                [env.reset()], dtype=torch.float).to(model.device)
+                [one_hot_board(env.reset())], dtype=torch.float).to(model.device)
 
         if step % target_update == 0:
             model.target_update()
