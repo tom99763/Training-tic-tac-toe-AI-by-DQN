@@ -1,5 +1,5 @@
 from algorithm import DQN
-from tictactoe.env import TicTacToe
+from gym_tictactoe.env import TicTacToeEnv
 import torch
 import numpy as np
 import random
