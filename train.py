@@ -14,7 +14,7 @@ def run():
         t = np.clip(step / eps_steps, 0, 1)
         eps = (1 - t) * eps_start + t * eps_end
         print('\r'+f'step----{step},epsilon----{eps}', flush=True, end='')
-        action, was_random = model.select_action(state, eps)
+        action, _ = model.select_action(state, eps)
         next_state, reward, done, _ = env.step(action.item())
         next_state=one_hot_board(next_state)
         
