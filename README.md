@@ -8,6 +8,6 @@ https://github.com/haje01/gym-tictactoe
 python train.py
 
 
-# test training result to have a competition with ur AI
+# test training result to compete with AI
 
-python test.py  
+python against_AI.py 
